@@ -120,6 +120,9 @@ function draw() {
     //adicionar gravidade
     trex.velocityY = trex.velocityY + 0.8;
 
+    //impedir que o trex caia
+  trex.collide(invisibleGround);
+    
     //gerar as nuvens
     spawnClouds();
 
@@ -130,6 +133,7 @@ function draw() {
       gameState = END;
       dieSound.play();
     }
+   
   } else if (gameState === END) {
     //console.log("hey");
     gameOver.visible = true;
@@ -147,18 +151,14 @@ function draw() {
 
     obstaclesGroup.setVelocityXEach(0);
     cloudsGroup.setVelocityXEach(0);
-    if (mousePressedOver(restart)) {
-      reset();
-    }
-  }
+    
 
-  //impedir que o trex caia
-  trex.collide(invisibleGround);
+  
   if (touches.length > 0 || keyDown("SPACE") || mousePressedOver(restart)) {
       reset();
       touches = [];
     }
-
+  }
   drawSprites();
 }
 
